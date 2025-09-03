@@ -21,6 +21,7 @@ python-jose[cryptography]==3.3.0
 python-multipart==0.0.6
 passlib[bcrypt]==1.7.4
 bcrypt==4.1.2
+itsdangerous==2.1.2
 
 # Geographic calculations
 geopy==2.4.1
