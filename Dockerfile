@@ -3,19 +3,23 @@
 # Stage 1: Build frontend
 FROM node:18-alpine AS frontend-builder
 
-WORKDIR /app
-
 # Install build dependencies
 RUN apk add --no-cache git python3 make g++
 
-# Copy frontend files to working directory
-COPY frontend/ ./frontend/
+# Set working directory
+WORKDIR /build
 
-# Change to frontend directory and build
-WORKDIR /app/frontend
+# Copy and install dependencies first (for better caching)
+COPY frontend/package*.json ./
+RUN npm install --legacy-peer-deps
+
+# Copy the rest of the frontend code
+COPY frontend/ ./
+
+# Build the application
 ENV GENERATE_SOURCEMAP=false
 ENV NODE_OPTIONS="--max_old_space_size=4096"
-RUN npm install --legacy-peer-deps && npm run build
+RUN npm run build
 
 # Stage 2: Python application
 FROM python:3.10-slim
@@ -42,7 +46,7 @@ COPY webapp/metroVI-linux-intel ./metroVI
 RUN chmod +x ./metroVI
 
 # Copy built frontend from stage 1
-COPY --from=frontend-builder /app/frontend/build ./static
+COPY --from=frontend-builder /build/build ./static
 
 # Environment variables
 ENV PYTHONUNBUFFERED=1
