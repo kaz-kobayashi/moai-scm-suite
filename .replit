@@ -1,36 +1,21 @@
-run = "cd webapp && pip install -r requirements.txt && cd ../frontend && npm install && npm run build && cd ../webapp && python -m uvicorn app.main:app --host 0.0.0.0 --port 8000"
+modules = ["python-3.11", "nodejs-20"]
 
 [nix]
 channel = "stable-24_05"
 
 [deployment]
-run = ["sh", "-c", "cd webapp && python -m uvicorn app.main:app --host 0.0.0.0 --port 8000"]
+run = ["sh", "-c", "cd webapp && python -m uvicorn app.main:app --host 0.0.0.0 --port $PORT"]
+deploymentTarget = "cloudrun"
+ignorePorts = false
 
-[[ports]]
-localPort = 8000
-externalPort = 80
+[languages]
 
-[[ports]]
-localPort = 3000
-externalPort = 3000
-
-[env]
-PYTHON_VERSION = "3.10"
-NODE_VERSION = "18"
-
-[packager]
-language = "python3"
-
-[packager.features]
-enabledForHosting = false
-packageSearch = true
-guessImports = true
-
-[languages.python3]
+[languages.python]
 pattern = "**/*.py"
-
-[languages.python3.languageServer]
+[languages.python.languageServer]
 start = "pylsp"
 
-[unitTest]
-language = "python3"
+[languages.javascript]
+pattern = "**/{*.js,*.jsx,*.ts,*.tsx,*.json}"
+[languages.javascript.languageServer]
+start = "typescript-language-server --stdio"

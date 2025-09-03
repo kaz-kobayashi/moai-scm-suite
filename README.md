@@ -129,7 +129,18 @@ REACT_APP_API_BASE_URL=http://localhost:8000
      --set-env-vars "GOOGLE_CLIENT_ID=[your-client-id]"
    ```
 
-### Option 3: One-Click Deploy
+### Option 3: Deploy to Replit (Easiest)
+
+[![Run on Repl.it](https://replit.com/badge/github/kaz-kobayashi/moai-scm-suite)](https://replit.com/new/github/kaz-kobayashi/moai-scm-suite)
+
+- ✅ **Zero configuration required**
+- ✅ **Automatic setup and deployment**
+- ✅ **Free hosting with instant access**
+- ✅ **Perfect for testing and development**
+
+See [REPLIT_SETUP.md](REPLIT_SETUP.md) for detailed instructions.
+
+### Option 4: One-Click Deploy to Google Cloud
 
 [![Run on Google Cloud](https://deploy.cloud.run/button.svg)](https://deploy.cloud.run/?git_repo=https://github.com/[your-username]/moai-scm-suite.git)
 
