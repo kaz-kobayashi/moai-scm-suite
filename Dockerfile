@@ -5,21 +5,16 @@ FROM node:18-alpine AS frontend-builder
 
 WORKDIR /frontend
 
-# Install dependencies
+# Install build dependencies
 RUN apk add --no-cache git python3 make g++
 
-# Copy package.json first
-COPY frontend/package.json ./
-# Copy package-lock.json if it exists
-COPY frontend/package-lock.json* ./
-
-# Clean install dependencies
-RUN npm ci --legacy-peer-deps || npm install --legacy-peer-deps
-
+# Copy frontend files
 COPY frontend/ .
+
+# Install npm dependencies and build
 ENV GENERATE_SOURCEMAP=false
 ENV NODE_OPTIONS="--max_old_space_size=4096"
-RUN npm run build
+RUN npm install --legacy-peer-deps && npm run build
 
 # Stage 2: Python application
 FROM python:3.10-slim
