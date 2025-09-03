@@ -34,8 +34,13 @@ Thumbs.db
 .git/
 .gitignore
 
-# Documentation
-*.md
+# Documentation (but keep essential files)
+README.md
+DEPLOYMENT*.md
+TROUBLESHOOT*.md
+QUICK_START.md
+REPLIT*.md
+GITHUB*.md
 LICENSE
 
 # Test files
@@ -45,9 +50,11 @@ test*.json
 *.test.ts
 
 # Development files
-.env.local
-.env.development
-.env.test
+frontend/.env.local
+frontend/.env.development
+frontend/.env.test
+webapp/.env
+.env
 
 # Jupyter
 *.ipynb
