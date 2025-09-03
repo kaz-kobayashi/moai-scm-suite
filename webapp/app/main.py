@@ -6,6 +6,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
+from starlette.middleware.sessions import SessionMiddleware
 import os
 
 from .api.api import api_router, public_api_router
@@ -15,6 +16,10 @@ app = FastAPI(
     description="サプライチェーン最適化システム - Jupyter notebookから完全移植されたAPI",
     version="1.0.0"
 )
+
+# セッションミドルウェアを追加（OAuth認証用）
+SECRET_KEY = os.getenv("SECRET_KEY", "your-secret-key-change-in-production")
+app.add_middleware(SessionMiddleware, secret_key=SECRET_KEY)
 
 # CORS設定
 app.add_middleware(
@@ -66,6 +71,15 @@ async def public_app():
     if os.path.exists(index_path):
         return FileResponse(index_path)
     return {"message": "React app not found", "available_endpoints": ["/public", "/public/health"]}
+
+@app.get("/public/login-success")
+async def login_success():
+    """ログイン成功ページ"""
+    return {
+        "message": "ログインに成功しました！",
+        "redirect": "/public/app",
+        "instructions": "トークンがURLパラメータに含まれています。フロントエンドでlocalStorageに保存してください。"
+    }
 
 # Serve React app
 static_dir = "static"
