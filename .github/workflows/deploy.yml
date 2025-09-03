@@ -67,7 +67,7 @@ jobs:
           --memory=2Gi \
           --cpu=2 \
           --timeout=300 \
-          --set-env-vars="GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }},GOOGLE_CLIENT_SECRET=${{ secrets.GOOGLE_CLIENT_SECRET }},SECRET_KEY=${{ secrets.SECRET_KEY }},OSRM_HOST=test-osrm-intel.aq-cloud.com"
+          --set-env-vars="OSRM_HOST=test-osrm-intel.aq-cloud.com"
 
     - name: Show Output
       run: |-
