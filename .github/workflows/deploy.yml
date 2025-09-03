@@ -25,6 +25,15 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
 
+    - name: Debug - Check repository structure
+      run: |
+        echo "=== Repository root ==="
+        ls -la
+        echo "=== Frontend directory ==="
+        ls -la frontend/
+        echo "=== Checking for package.json ==="
+        find . -name "package.json" -type f
+
     - name: Google Auth using Workload Identity Federation
       id: auth
       uses: 'google-github-actions/auth@v2'
@@ -54,11 +63,11 @@ jobs:
           --image=${{ env.REGISTRY }}/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{ github.sha }} \
           --region=${{ env.REGION }} \
           --platform=managed \
-          --allow-unauthenticated \
+          --no-allow-unauthenticated \
           --memory=2Gi \
           --cpu=2 \
           --timeout=300 \
-          --set-env-vars="GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }},OSRM_HOST=test-osrm-intel.aq-cloud.com"
+          --set-env-vars="GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }},GOOGLE_CLIENT_SECRET=${{ secrets.GOOGLE_CLIENT_SECRET }},SECRET_KEY=${{ secrets.SECRET_KEY }},OSRM_HOST=test-osrm-intel.aq-cloud.com"
 
     - name: Show Output
       run: |-

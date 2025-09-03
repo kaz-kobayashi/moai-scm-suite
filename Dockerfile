@@ -7,13 +7,20 @@ FROM node:18-alpine AS frontend-builder
 RUN apk add --no-cache git python3 make g++
 
 # Set working directory
+WORKDIR /app
+
+# Debug: Check build context
+RUN echo "=== Build context debug ===" && pwd
+
+# Copy entire frontend directory with trailing slashes
+COPY frontend/ ./frontend/
+
+# Navigate to frontend directory
 WORKDIR /app/frontend
 
-# Copy entire frontend directory
-COPY frontend .
-
 # Verify files exist
-RUN ls -la && \
+RUN echo "=== Checking frontend directory ===" && \
+    ls -la && \
     if [ ! -f "package.json" ]; then echo "ERROR: package.json not found"; exit 1; fi
 
 # Install dependencies

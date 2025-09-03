@@ -5,7 +5,7 @@ FastAPIメインアプリケーション
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, HTMLResponse
 from starlette.middleware.sessions import SessionMiddleware
 import os
 
@@ -53,9 +53,11 @@ async def public_access():
         "version": "1.0.0",
         "status": "accessible",
         "endpoints": {
-            "api_docs": "/public/docs",
+            "login": "/public/login",
+            "api_docs": "/public/api/v1/docs",
             "health": "/public/health", 
-            "app": "/public/app"
+            "app": "/public/app",
+            "test_users": "/public/api/v1/auth/test-users"
         }
     }
 
@@ -80,6 +82,15 @@ async def login_success():
         "redirect": "/public/app",
         "instructions": "トークンがURLパラメータに含まれています。フロントエンドでlocalStorageに保存してください。"
     }
+
+@app.get("/public/login", response_class=HTMLResponse)
+async def login_page():
+    """ログインページを表示"""
+    login_html_path = os.path.join(os.path.dirname(__file__), "templates", "login.html")
+    if os.path.exists(login_html_path):
+        with open(login_html_path, "r", encoding="utf-8") as f:
+            return HTMLResponse(content=f.read())
+    return HTMLResponse(content="<h1>Login page not found</h1>")
 
 # Serve React app
 static_dir = "static"
