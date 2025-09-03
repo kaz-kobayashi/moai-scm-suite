@@ -10,8 +10,8 @@
 ### Step 1: Fork and Clone
 ```bash
 # Fork this repository on GitHub, then:
-git clone https://github.com/[your-username]/scmopt.git
-cd scmopt
+git clone https://github.com/[your-username]/moai-scm-suite.git
+cd moai-scm-suite
 ```
 
 ### Step 2: Google Cloud Setup

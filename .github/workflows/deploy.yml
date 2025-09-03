@@ -9,7 +9,7 @@ on:
 
 env:
   PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
-  SERVICE: scmopt
+  SERVICE: moai-scm-suite
   REGION: asia-northeast1
 
 jobs:

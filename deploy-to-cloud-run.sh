@@ -5,7 +5,7 @@
 # Configuration
 #PROJECT_ID="your-project-id"
 PROJECT_ID="moai-scm-suite"
-SERVICE_NAME="scmopt"
+SERVICE_NAME="moai-scm-suite"
 REGION="asia-northeast1"
 IMAGE_NAME="gcr.io/${PROJECT_ID}/${SERVICE_NAME}"
 

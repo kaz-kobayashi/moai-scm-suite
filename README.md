@@ -1,4 +1,4 @@
-# SCMOpt - Supply Chain Management Optimization System
+# MOAI SCM Suite - Supply Chain Management Optimization System
 
 A comprehensive web application for supply chain management optimization, featuring ABC analysis, Vehicle Routing Problem (VRP) solving, inventory optimization, and interactive data visualization.
 
@@ -32,8 +32,8 @@ A comprehensive web application for supply chain management optimization, featur
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/[your-username]/scmopt.git
-cd scmopt
+git clone https://github.com/[your-username]/moai-scm-suite.git
+cd moai-scm-suite
 ```
 
 ### 2. Backend Setup
@@ -131,7 +131,7 @@ REACT_APP_API_BASE_URL=http://localhost:8000
 
 ### Option 3: One-Click Deploy
 
-[![Run on Google Cloud](https://deploy.cloud.run/button.svg)](https://deploy.cloud.run/?git_repo=https://github.com/[your-username]/scmopt.git)
+[![Run on Google Cloud](https://deploy.cloud.run/button.svg)](https://deploy.cloud.run/?git_repo=https://github.com/[your-username]/moai-scm-suite.git)
 
 ## 🔧 Configuration
 
@@ -192,7 +192,7 @@ docker run -p 8080:8080 \
 ## 📁 Project Structure
 
 ```
-scmopt/
+moai-scm-suite/
 ├── .github/workflows/        # GitHub Actions
 │   └── deploy.yml           # Automated deployment workflow
 ├── frontend/                 # React TypeScript frontend
@@ -249,7 +249,7 @@ gcloud builds log [BUILD_ID]
 ### Step-by-Step GitHub Deployment
 
 1. **Create New Repository on GitHub**
-   - Go to GitHub.com and create a new repository named `scmopt`
+   - Go to GitHub.com and create a new repository named `moai-scm-suite`
    - Choose "Public" or "Private" as needed
    - Don't initialize with README (we have one)
 
@@ -260,7 +260,7 @@ gcloud builds log [BUILD_ID]
    git add .
    git commit -m "Initial commit: Complete SCM optimization web application"
    git branch -M main
-   git remote add origin https://github.com/[your-username]/scmopt.git
+   git remote add origin https://github.com/[your-username]/moai-scm-suite.git
    git push -u origin main
    ```
 
