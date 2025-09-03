@@ -67,46 +67,36 @@ REACT_APP_API_BASE_URL=http://localhost:8000
 
 ### Option 1: Automated GitHub Actions Deployment (Recommended)
 
+✅ **Zero configuration deployment** - Uses Workload Identity Federation (no service account keys needed)
+✅ **Automatic on push** - Deploy on every push to main branch
+✅ **Solves architecture issues** - Builds in Linux environment automatically
+
+**Quick Setup:**
+
 1. **Fork this repository** to your GitHub account
 
-2. **Set up Google Cloud Project**:
+2. **Run the setup script**:
    ```bash
-   gcloud projects create [PROJECT_ID]
-   gcloud config set project [PROJECT_ID]
-   gcloud services enable cloudbuild.googleapis.com run.googleapis.com
+   git clone https://github.com/kaz-kobayashi/moai-scm-suite.git
+   cd moai-scm-suite
+   chmod +x setup-workload-identity.sh
+   ./setup-workload-identity.sh
    ```
 
-3. **Create Service Account**:
-   ```bash
-   gcloud iam service-accounts create github-actions \
-     --description="Service account for GitHub Actions" \
-     --display-name="GitHub Actions"
-
-   gcloud projects add-iam-policy-binding [PROJECT_ID] \
-     --member="serviceAccount:github-actions@[PROJECT_ID].iam.gserviceaccount.com" \
-     --role="roles/run.admin"
-
-   gcloud projects add-iam-policy-binding [PROJECT_ID] \
-     --member="serviceAccount:github-actions@[PROJECT_ID].iam.gserviceaccount.com" \
-     --role="roles/storage.admin"
-
-   gcloud projects add-iam-policy-binding [PROJECT_ID] \
-     --member="serviceAccount:github-actions@[PROJECT_ID].iam.gserviceaccount.com" \
-     --role="roles/iam.serviceAccountUser"
-
-   gcloud iam service-accounts keys create key.json \
-     --iam-account=github-actions@[PROJECT_ID].iam.gserviceaccount.com
-   ```
-
-4. **Configure GitHub Secrets**:
-   Go to your repository Settings > Secrets and variables > Actions, and add:
+3. **Configure GitHub Secrets**:
+   Go to your repository Settings > Secrets and variables > Actions, and add the values shown by the setup script:
    - `GCP_PROJECT_ID`: Your Google Cloud project ID
-   - `GCP_SA_KEY`: Content of the key.json file (entire JSON content)
+   - `GCP_SA_EMAIL`: Service account email
+   - `GCP_WORKLOAD_IDENTITY_PROVIDER`: Workload Identity Provider resource name
    - `GOOGLE_CLIENT_ID`: Your Google OAuth client ID
 
-5. **Trigger Deployment**:
-   - Push to the `main` branch or manually trigger the "Deploy to Cloud Run" workflow
-   - The GitHub Action will automatically build and deploy your application
+4. **Deploy**:
+   ```bash
+   git push origin main
+   ```
+   The GitHub Action will automatically build and deploy your application!
+
+📖 **Detailed Guide**: See [GITHUB_ACTIONS_SETUP.md](GITHUB_ACTIONS_SETUP.md) for complete step-by-step instructions.
 
 ### Option 2: Manual Deployment
 

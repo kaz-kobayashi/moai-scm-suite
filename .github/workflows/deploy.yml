@@ -11,10 +11,11 @@ env:
   PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
   SERVICE: moai-scm-suite
   REGION: asia-northeast1
+  REGISTRY: gcr.io
 
 jobs:
   deploy:
-    # Add "id-token" with the intended permissions.
+    # Add "id-token" with the intended permissions for Workload Identity Federation
     permissions:
       contents: read
       id-token: write
@@ -22,40 +23,46 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
-    - name: Google Auth
+    - name: Google Auth using Workload Identity Federation
       id: auth
-      uses: 'google-github-actions/auth@v1'
+      uses: 'google-github-actions/auth@v2'
       with:
-        credentials_json: '${{ secrets.GCP_SA_KEY }}'
+        workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+        service_account: ${{ secrets.GCP_SA_EMAIL }}
 
-    - name: Docker Auth
-      id: docker-auth
-      uses: 'docker/login-action@v2'
-      with:
-        username: _json_key
-        password: ${{ secrets.GCP_SA_KEY }}
-        registry: gcr.io
+    - name: Set up Cloud SDK
+      uses: google-github-actions/setup-gcloud@v2
 
-    - name: Build and Push Container
+    - name: Configure Docker to use gcloud as credential helper
       run: |-
-        docker build -t "gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{ github.sha }}" .
-        docker push "gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{ github.sha }}"
+        gcloud --quiet auth configure-docker
+
+    - name: Build Docker image
+      run: |-
+        docker build -t "${{ env.REGISTRY }}/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{ github.sha }}" .
+
+    - name: Push Docker image
+      run: |-
+        docker push "${{ env.REGISTRY }}/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{ github.sha }}"
 
     - name: Deploy to Cloud Run
       id: deploy
-      uses: google-github-actions/deploy-cloudrun@v1
-      with:
-        service: ${{ env.SERVICE }}
-        region: ${{ env.REGION }}
-        # NOTE: If using a pre-built image, update the image name here
-        image: gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{ github.sha }}
-        env_vars: |
-          GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }}
-          OSRM_HOST=test-osrm-intel.aq-cloud.com
-        flags: '--allow-unauthenticated --memory=2Gi --cpu=2 --timeout=300'
+      run: |-
+        gcloud run deploy ${{ env.SERVICE }} \
+          --image=${{ env.REGISTRY }}/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{ github.sha }} \
+          --region=${{ env.REGION }} \
+          --platform=managed \
+          --allow-unauthenticated \
+          --memory=2Gi \
+          --cpu=2 \
+          --timeout=300 \
+          --set-env-vars="GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }},OSRM_HOST=test-osrm-intel.aq-cloud.com"
 
-    # If required, use the Cloud Run url output in later steps
     - name: Show Output
-      run: echo ${{ steps.deploy.outputs.url }}
+      run: |-
+        echo "🎉 Deployment complete!"
+        gcloud run services describe ${{ env.SERVICE }} \
+          --region=${{ env.REGION }} \
+          --format='value(status.url)' || echo "Service URL not available yet"
