@@ -1,0 +1,271 @@
+/* EOQ Calculator - Professional Dashboard Design */
+
+/* Calculator Header */
+.calculator-header {
+  text-align: center;
+  margin-bottom: 32px;
+  padding: 24px;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.08) 0%, rgba(118, 75, 162, 0.08) 100%);
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.calculator-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #f5576c);
+  border-radius: 16px 16px 0 0;
+}
+
+.calculator-header h3 {
+  font-size: 2.2em;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 8px 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.calculator-header p {
+  font-size: 1.1em;
+  color: var(--text-secondary);
+  margin: 0;
+  font-weight: 500;
+}
+
+/* Result Header */
+.result-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.result-header h4 {
+  font-size: 2em;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 8px 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.result-header p {
+  font-size: 1em;
+  color: var(--text-secondary);
+  margin: 0;
+  font-weight: 500;
+}
+
+/* Result Metrics - Dashboard Style */
+.result-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin-bottom: 32px;
+}
+
+.metric-card {
+  padding: 24px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  background: white;
+  border: 2px solid transparent;
+}
+
+.metric-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+.metric-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+}
+
+.metric-card.primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+}
+
+.metric-card.secondary {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+  box-shadow: 0 8px 25px rgba(240, 147, 251, 0.3);
+}
+
+.metric-card.tertiary {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  color: white;
+  box-shadow: 0 8px 25px rgba(79, 172, 254, 0.3);
+}
+
+.metric-card.quaternary {
+  background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+  color: white;
+  box-shadow: 0 8px 25px rgba(67, 233, 123, 0.3);
+}
+
+.metric-card.quinary {
+  background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+  color: white;
+  box-shadow: 0 8px 25px rgba(250, 112, 154, 0.3);
+}
+
+.metric-card.efficiency {
+  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+  color: #333;
+  box-shadow: 0 8px 25px rgba(168, 237, 234, 0.3);
+}
+
+.metric-icon {
+  font-size: 3em;
+  line-height: 1;
+  opacity: 0.9;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.metric-content {
+  flex: 1;
+}
+
+.metric-label {
+  font-size: 0.9em;
+  font-weight: 500;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.9;
+}
+
+.metric-value {
+  font-size: 2.8em;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 4px;
+  font-family: 'IBM Plex Sans', monospace;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.metric-unit {
+  font-size: 0.85em;
+  font-weight: 500;
+  opacity: 0.8;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Explanation Grid */
+.explanation-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.explanation-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px;
+  background: rgba(15, 98, 254, 0.05);
+  border-radius: 12px;
+  border-left: 4px solid var(--primary-color);
+}
+
+.explanation-icon {
+  font-size: 2em;
+  line-height: 1;
+  margin-top: 4px;
+}
+
+.explanation-item strong {
+  display: block;
+  color: var(--primary-color);
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-size: 1.1em;
+}
+
+.explanation-item p {
+  margin: 0;
+  color: var(--text-primary);
+  line-height: 1.5;
+  font-size: 0.95em;
+}
+
+/* Animation */
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  50% { transform: translateX(100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes countUp {
+  from { 
+    opacity: 0; 
+    transform: translateY(20px) scale(0.8); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0) scale(1); 
+  }
+}
+
+.metric-card {
+  animation: countUp 0.6s ease-out forwards;
+}
+
+.metric-card:nth-child(1) { animation-delay: 0.1s; }
+.metric-card:nth-child(2) { animation-delay: 0.2s; }
+.metric-card:nth-child(3) { animation-delay: 0.3s; }
+.metric-card:nth-child(4) { animation-delay: 0.4s; }
+.metric-card:nth-child(5) { animation-delay: 0.5s; }
+.metric-card:nth-child(6) { animation-delay: 0.6s; }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .result-metrics {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .metric-card {
+    padding: 20px;
+    gap: 16px;
+  }
+  
+  .metric-icon {
+    font-size: 2.5em;
+  }
+  
+  .metric-value {
+    font-size: 2.2em;
+  }
+  
+  .explanation-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .calculator-header h3 {
+    font-size: 1.8em;
+  }
+  
+  .result-header h4 {
+    font-size: 1.6em;
+  }
+}

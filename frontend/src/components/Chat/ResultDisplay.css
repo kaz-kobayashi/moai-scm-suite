@@ -1,0 +1,479 @@
+/* Business-like Result Display for SAP IBP Style */
+@import '../SAPStyle.css';
+
+.result-display {
+  margin: 16px 0;
+  padding: 0;
+  background: var(--sap-white);
+  border: 1px solid var(--sap-border-gray);
+  border-radius: 6px;
+  box-shadow: var(--sap-shadow-light);
+  font-family: var(--sap-font-family);
+  position: relative;
+  overflow: hidden;
+}
+
+.result-display.error {
+  background: rgba(255, 59, 48, 0.05);
+  border-color: var(--sap-error);
+  color: var(--sap-error);
+}
+
+.result-display h4 {
+  margin: 0;
+  font-size: var(--sap-font-size-lg);
+  font-weight: 600;
+  color: var(--sap-text-dark);
+  padding: 16px 20px;
+  background: var(--sap-light-gray);
+  border-bottom: 1px solid var(--sap-border-gray);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.result-display h4::before {
+  content: '';
+  width: 4px;
+  height: 20px;
+  background: var(--sap-primary);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.result-display h5 {
+  margin: 20px 0 12px 0;
+  font-size: var(--sap-font-size-md);
+  font-weight: 600;
+  color: var(--sap-text-dark);
+  padding: 0 20px;
+}
+
+.result-message {
+  margin: 16px 20px;
+  padding: 12px 16px;
+  background: rgba(0, 112, 243, 0.05);
+  border-left: 3px solid var(--sap-primary);
+  border-radius: 4px;
+  color: var(--sap-text-dark);
+  font-size: var(--sap-font-size-sm);
+}
+
+/* Chart Container */
+.chart-container {
+  margin: 20px;
+  background: var(--sap-white);
+  border: 1px solid var(--sap-border-gray);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: var(--sap-shadow-light);
+}
+
+.chart-container .sap-chart-header {
+  padding: 12px 16px;
+  background: var(--sap-light-gray);
+  border-bottom: 1px solid var(--sap-border-gray);
+  font-weight: 600;
+  font-size: var(--sap-font-size-sm);
+  color: var(--sap-text-dark);
+}
+
+/* Table Styles */
+.table-container {
+  margin: 20px;
+}
+
+.data-section {
+  margin: 20px 0;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  border-radius: 6px;
+  border: 1px solid var(--sap-border-gray);
+  background: var(--sap-white);
+}
+
+.result-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: var(--sap-font-size-sm);
+}
+
+.result-table th {
+  background: var(--sap-light-gray);
+  color: var(--sap-text-dark);
+  font-weight: 600;
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--sap-border-gray);
+  font-size: var(--sap-font-size-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.result-table td {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--sap-medium-gray);
+  color: var(--sap-text-dark);
+  font-weight: 400;
+  transition: background-color 0.2s ease;
+}
+
+.result-table tbody tr:hover {
+  background: var(--sap-light-gray);
+}
+
+.result-table tbody tr:nth-child(even) {
+  background: rgba(244, 246, 248, 0.5);
+}
+
+.table-note {
+  padding: 8px 12px;
+  margin: 0;
+  background: var(--sap-light-gray);
+  color: var(--sap-text-medium);
+  font-size: var(--sap-font-size-xs);
+  text-align: center;
+  border-top: 1px solid var(--sap-border-gray);
+}
+
+/* Metrics Grid - Business Professional Style */
+.metrics-container {
+  margin: 20px;
+}
+
+.metrics-container h5 {
+  margin: 0 0 16px 0;
+  font-size: var(--sap-font-size-lg);
+  font-weight: 600;
+  color: var(--sap-text-dark);
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--sap-border-gray);
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.metric-item {
+  padding: 20px 16px;
+  background: var(--sap-white);
+  border: 1px solid var(--sap-border-gray);
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: var(--sap-shadow-light);
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.metric-item:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--sap-shadow-medium);
+}
+
+/* Professional color scheme for different metrics */
+.metric-item:nth-child(1) {
+  border-left: 4px solid #0070f3;
+}
+
+.metric-item:nth-child(2) {
+  border-left: 4px solid #00b4d8;
+}
+
+.metric-item:nth-child(3) {
+  border-left: 4px solid #30d158;
+}
+
+.metric-item:nth-child(4) {
+  border-left: 4px solid #ff9f0a;
+}
+
+.metric-item:nth-child(5) {
+  border-left: 4px solid #ff3b30;
+}
+
+.metric-item:nth-child(6) {
+  border-left: 4px solid #7c3aed;
+}
+
+.metric-label {
+  font-weight: 500;
+  color: var(--sap-text-medium);
+  font-size: var(--sap-font-size-xs);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.metric-value {
+  font-weight: 700;
+  color: var(--sap-text-dark);
+  font-size: 2rem;
+  line-height: 1;
+  font-family: var(--sap-font-family);
+  margin-bottom: 4px;
+}
+
+.metric-trend {
+  font-size: var(--sap-font-size-xs);
+  color: var(--sap-text-light);
+  font-weight: 500;
+}
+
+/* Cost and Summary Displays */
+.cost-summary,
+.optimal-values,
+.network-summary {
+  background: var(--sap-white);
+  border: 1px solid var(--sap-border-gray);
+  border-left: 4px solid var(--sap-primary);
+  padding: 20px;
+  border-radius: 6px;
+  margin: 20px;
+  box-shadow: var(--sap-shadow-light);
+}
+
+.cost-summary h5,
+.optimal-values h5,
+.network-summary h5 {
+  margin: 0 0 12px 0;
+  color: var(--sap-text-dark);
+  font-size: var(--sap-font-size-md);
+  font-weight: 600;
+  border-bottom: 1px solid var(--sap-medium-gray);
+  padding-bottom: 8px;
+}
+
+.optimal-values p,
+.network-summary p {
+  margin: 6px 0;
+  font-size: var(--sap-font-size-sm);
+  color: var(--sap-text-dark);
+  line-height: 1.4;
+}
+
+/* Result Data */
+.result-data {
+  margin: 20px;
+  background: var(--sap-light-gray);
+  border: 1px solid var(--sap-border-gray);
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+.result-data pre {
+  margin: 0;
+  padding: 16px;
+  color: var(--sap-text-dark);
+  font-size: var(--sap-font-size-sm);
+  line-height: 1.4;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-family: 'Monaco', 'Menlo', monospace;
+}
+
+/* Function-specific minimal styling */
+.result-display.abc {
+  border-top: 3px solid var(--sap-success);
+}
+
+.result-display.vrp {
+  border-top: 3px solid var(--sap-warning);
+}
+
+.result-display.inventory {
+  border-top: 3px solid var(--sap-primary);
+}
+
+.result-display.logistics {
+  border-top: 3px solid var(--sap-accent);
+}
+
+.result-display.generic {
+  border-top: 3px solid var(--sap-text-medium);
+}
+
+.result-display.sample-data {
+  border-top: 3px solid var(--sap-info);
+}
+
+/* Loading State */
+.result-display.loading {
+  background: var(--sap-light-gray);
+  border: 2px dashed var(--sap-border-gray);
+  text-align: center;
+  color: var(--sap-text-medium);
+  padding: 40px 20px;
+}
+
+.loading-spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--sap-border-gray);
+  border-radius: 50%;
+  border-top-color: var(--sap-primary);
+  animation: spin 1s ease-in-out infinite;
+  margin-right: 8px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Explanation Styles */
+.abc-explanation,
+.inventory-explanation,
+.vrp-explanation,
+.logistics-explanation,
+.sample-data-explanation {
+  margin: 20px;
+  padding: 16px;
+  background: rgba(0, 112, 243, 0.03);
+  border: 1px solid var(--sap-border-gray);
+  border-left: 3px solid var(--sap-primary);
+  border-radius: 6px;
+  color: var(--sap-text-dark);
+}
+
+.abc-explanation h5,
+.inventory-explanation h5,
+.vrp-explanation h5,
+.logistics-explanation h5,
+.sample-data-explanation h5 {
+  margin: 0 0 8px 0;
+  color: var(--sap-text-dark);
+  font-size: var(--sap-font-size-sm);
+  font-weight: 600;
+}
+
+.abc-explanation ul,
+.inventory-explanation ul,
+.vrp-explanation ul,
+.logistics-explanation ul,
+.sample-data-explanation ul {
+  margin: 8px 0;
+  padding-left: 20px;
+}
+
+.abc-explanation li,
+.inventory-explanation li,
+.vrp-explanation li,
+.logistics-explanation li,
+.sample-data-explanation li {
+  margin: 4px 0;
+  font-size: var(--sap-font-size-sm);
+  line-height: 1.4;
+  color: var(--sap-text-medium);
+}
+
+/* Status Indicators */
+.sap-status-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.sap-status-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: var(--sap-white);
+  border: 1px solid var(--sap-border-gray);
+  border-radius: 4px;
+  font-size: var(--sap-font-size-sm);
+}
+
+.sap-status-item.success {
+  border-left: 3px solid var(--sap-success);
+}
+
+.sap-status-item.warning {
+  border-left: 3px solid var(--sap-warning);
+}
+
+.sap-status-item.error {
+  border-left: 3px solid var(--sap-error);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .metrics-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  
+  .result-table {
+    font-size: var(--sap-font-size-xs);
+  }
+  
+  .result-table th,
+  .result-table td {
+    padding: 6px 8px;
+  }
+  
+  .chart-container,
+  .cost-summary,
+  .optimal-values,
+  .network-summary,
+  .abc-explanation,
+  .inventory-explanation,
+  .vrp-explanation,
+  .logistics-explanation {
+    margin: 16px 12px;
+  }
+  
+  .result-display {
+    margin: 12px 0;
+  }
+
+  .metric-value {
+    font-size: 1.5rem;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .result-display {
+    box-shadow: none;
+    border: 1px solid #000;
+    break-inside: avoid;
+    background: white !important;
+  }
+  
+  .chart-container {
+    break-inside: avoid;
+  }
+  
+  .cost-summary,
+  .optimal-values,
+  .network-summary {
+    background: white !important;
+    color: #000 !important;
+    border: 1px solid #000;
+  }
+
+  .abc-explanation,
+  .inventory-explanation,
+  .vrp-explanation,
+  .logistics-explanation {
+    background: #f9f9f9 !important;
+    color: #000 !important;
+    border: 1px solid #000;
+  }
+
+  .metric-item {
+    background: white !important;
+    border: 1px solid #000;
+  }
+}

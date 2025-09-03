@@ -1,0 +1,8 @@
+/* Import Modern Design System */
+@import './styles/design-system.css';
+@import './styles/components.css';
+
+/* Legacy support for existing code */
+code {
+  font-family: var(--font-family-mono);
+}
