@@ -1,17 +1,18 @@
 # Multi-stage build for optimized image size
 
 # Stage 1: Build frontend
-FROM --platform=linux/amd64 node:18-alpine AS frontend-builder
+FROM node:18-alpine AS frontend-builder
 
 WORKDIR /frontend
 COPY frontend/package*.json ./
-RUN npm ci --only=production
+RUN npm ci
 
 COPY frontend/ .
+ENV GENERATE_SOURCEMAP=false
 RUN npm run build
 
 # Stage 2: Python application
-FROM --platform=linux/amd64 python:3.10-slim
+FROM python:3.10-slim
 
 WORKDIR /app
 
@@ -49,4 +50,4 @@ HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
 EXPOSE 8080
 
 # Run the application
-CMD exec uvicorn app.main:app --host 0.0.0.0 --port ${PORT} --workers 1
+CMD ["python", "-m", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080", "--workers", "1"]

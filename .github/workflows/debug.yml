@@ -1,0 +1,63 @@
+name: Debug GitHub Secrets
+
+on:
+  workflow_dispatch:  # Manual trigger only
+
+jobs:
+  debug:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+    - name: Check Secrets Configuration
+      run: |
+        echo "🔍 Checking GitHub Secrets configuration..."
+        echo ""
+        
+        if [ -n "${{ secrets.GCP_PROJECT_ID }}" ]; then
+          echo "✅ GCP_PROJECT_ID is set"
+        else
+          echo "❌ GCP_PROJECT_ID is missing"
+        fi
+        
+        if [ -n "${{ secrets.GCP_SA_EMAIL }}" ]; then
+          echo "✅ GCP_SA_EMAIL is set"
+        else
+          echo "❌ GCP_SA_EMAIL is missing"
+        fi
+        
+        if [ -n "${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}" ]; then
+          echo "✅ GCP_WORKLOAD_IDENTITY_PROVIDER is set"
+        else
+          echo "❌ GCP_WORKLOAD_IDENTITY_PROVIDER is missing"
+        fi
+        
+        if [ -n "${{ secrets.GOOGLE_CLIENT_ID }}" ]; then
+          echo "✅ GOOGLE_CLIENT_ID is set"
+        else
+          echo "⚠️ GOOGLE_CLIENT_ID is not set (optional for deployment)"
+        fi
+        
+        echo ""
+        echo "📋 Required Secrets Setup Guide:"
+        echo "1. Go to: https://github.com/kaz-kobayashi/moai-scm-suite/settings/secrets/actions"
+        echo "2. Add the missing secrets from the documentation"
+        echo "3. Re-run the deployment workflow"
+
+    - name: Test Google Auth (if secrets are available)
+      if: ${{ secrets.GCP_PROJECT_ID != '' && secrets.GCP_SA_EMAIL != '' && secrets.GCP_WORKLOAD_IDENTITY_PROVIDER != '' }}
+      id: auth
+      uses: 'google-github-actions/auth@v2'
+      with:
+        workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+        service_account: ${{ secrets.GCP_SA_EMAIL }}
+
+    - name: Test gcloud commands
+      if: steps.auth.outcome == 'success'
+      run: |
+        echo "🧪 Testing gcloud authentication..."
+        gcloud auth list
+        gcloud config list
+        echo "✅ Authentication successful!"
