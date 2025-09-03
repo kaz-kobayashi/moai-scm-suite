@@ -1,0 +1,68 @@
+{
+  "analysis_config": {
+    "analysis_year": 2023,
+    "analysis_month": null,
+    "comparison_year": 2022,
+    "safety_stock_factor": 1.65,
+    "simulation_samples": 100,
+    "simulation_periods": 100,
+    "random_seed": 123
+  },
+  "demand_summary": {
+    "total_records": 365,
+    "average_daily_demand": 150.75230163841738,
+    "demand_std_dev": 25.555793769311645,
+    "total_annual_demand": 55024.590098022345,
+    "coefficient_of_variation": 0.1695217485342795
+  },
+  "optimization_results": {
+    "eoq_cost": 639.6021490668313,
+    "safety_stock_cost": 200.27666041784045,
+    "network_optimization_cost": 358542.04104690143,
+    "cost_improvement_pct": -55957.04132952152,
+    "annual_savings": 130634390.19770963
+  },
+  "service_level_performance": {
+    "target_service_level": 95.05285319663518,
+    "achieved_service_level": 100.0,
+    "service_level_variance": 0.0
+  },
+  "inventory_policy_summary": [
+    {
+      "name": "Supplier_A",
+      "S": 0.0,
+      "local_base_stock_level": 0.0,
+      "net_replenishment_time": 5.0,
+      "average_demand": 0,
+      "h": 1,
+      "processing_time": 2
+    },
+    {
+      "name": "Warehouse_B",
+      "S": 0.0,
+      "local_base_stock_level": 0.0,
+      "net_replenishment_time": 4.0,
+      "average_demand": 0,
+      "h": 2,
+      "processing_time": 3
+    },
+    {
+      "name": "Distribution_C",
+      "S": 0.0,
+      "local_base_stock_level": -328.32339693897006,
+      "net_replenishment_time": 2.0,
+      "average_demand": 0,
+      "h": 5,
+      "processing_time": 1
+    },
+    {
+      "name": "Retail_D",
+      "S": 328.32339693897006,
+      "local_base_stock_level": 328.32339693897006,
+      "net_replenishment_time": 1.0,
+      "average_demand": 150,
+      "h": 10,
+      "processing_time": 1
+    }
+  ]
+}

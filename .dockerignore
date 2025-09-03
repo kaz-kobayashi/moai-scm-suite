@@ -1,0 +1,64 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+webapp/venv/
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-error.log*
+
+# Build outputs
+frontend/build/
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+
+# Documentation
+*.md
+LICENSE
+
+# Test files
+tests/
+test*.json
+*.test.tsx
+*.test.ts
+
+# Development files
+.env.local
+.env.development
+.env.test
+
+# Jupyter
+*.ipynb
+.ipynb_checkpoints/
+lightning_logs/
+
+# Large data files
+nbs/data/
+*.pkl
+*.pickle
+*.dump
+*.csv
+*.xlsx
+*.zip

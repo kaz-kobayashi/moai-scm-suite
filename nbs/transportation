@@ -1,0 +1,131 @@
+digraph G {
+	graph [rankdir=LR size=20]
+	subgraph "cluster[Supplier(0)]" {
+		color=lightblue style=filled
+		"Supplier(0)" [color=black shape=folder]
+	}
+	subgraph "cluster[Supplier(1)]" {
+		color=lightblue style=filled
+		"Supplier(1)" [color=black shape=folder]
+	}
+	subgraph "cluster[Customer(0)]" {
+		color=lightblue style=filled
+		"Customer(0)" [color=black shape=folder]
+	}
+	subgraph "cluster[Customer(1)]" {
+		color=lightblue style=filled
+		"Customer(1)" [color=black shape=folder]
+	}
+	subgraph "cluster[Customer(2)]" {
+		color=lightblue style=filled
+		"Customer(2)" [color=black shape=folder]
+	}
+	subgraph "cluster[Customer(3)]" {
+		color=lightblue style=filled
+		"Customer(3)" [color=black shape=folder]
+	}
+	subgraph "cluster[Customer(4)]" {
+		color=lightblue style=filled
+		"Customer(4)" [color=black shape=folder]
+	}
+	"Supplier(0)" -> "Customer(0)" [label="act(0,0) 
+" arrowhead=normal]
+	"Supplier(0)" -> "Customer(1)" [label="act(0,1) 
+" arrowhead=normal]
+	"Supplier(0)" -> "Customer(2)" [label="act(0,2) 
+" arrowhead=normal]
+	"Supplier(0)" -> "Customer(3)" [label="act(0,3) 
+" arrowhead=normal]
+	"Supplier(0)" -> "Customer(4)" [label="act(0,4) 
+" arrowhead=normal]
+	"Supplier(1)" -> "Customer(0)" [label="act(1,0) 
+" arrowhead=normal]
+	"Supplier(1)" -> "Customer(1)" [label="act(1,1) 
+" arrowhead=normal]
+	"Supplier(1)" -> "Customer(2)" [label="act(1,2) 
+" arrowhead=normal]
+	"Supplier(1)" -> "Customer(3)" [label="act(1,3) 
+" arrowhead=normal]
+	"Supplier(1)" -> "Customer(4)" [label="act(1,4) 
+" arrowhead=normal]
+	subgraph "cluster[act(0,0)]" {
+		color=lightgrey style=filled
+		"act(0,0)" [color=red shape=rectangle]
+		"act(0,0)
+ dummy product" [color=yellow shape=oval]
+		"mode(0,0)" [color=blue shape=box3d]
+		"act(0,0)" -> "mode(0,0)" [arrowhead=tee color=blue style=dotted]
+	}
+	subgraph "cluster[act(0,1)]" {
+		color=lightgrey style=filled
+		"act(0,1)" [color=red shape=rectangle]
+		"act(0,1)
+ dummy product" [color=yellow shape=oval]
+		"mode(0,1)" [color=blue shape=box3d]
+		"act(0,1)" -> "mode(0,1)" [arrowhead=tee color=blue style=dotted]
+	}
+	subgraph "cluster[act(0,2)]" {
+		color=lightgrey style=filled
+		"act(0,2)" [color=red shape=rectangle]
+		"act(0,2)
+ dummy product" [color=yellow shape=oval]
+		"mode(0,2)" [color=blue shape=box3d]
+		"act(0,2)" -> "mode(0,2)" [arrowhead=tee color=blue style=dotted]
+	}
+	subgraph "cluster[act(0,3)]" {
+		color=lightgrey style=filled
+		"act(0,3)" [color=red shape=rectangle]
+		"act(0,3)
+ dummy product" [color=yellow shape=oval]
+		"mode(0,3)" [color=blue shape=box3d]
+		"act(0,3)" -> "mode(0,3)" [arrowhead=tee color=blue style=dotted]
+	}
+	subgraph "cluster[act(0,4)]" {
+		color=lightgrey style=filled
+		"act(0,4)" [color=red shape=rectangle]
+		"act(0,4)
+ dummy product" [color=yellow shape=oval]
+		"mode(0,4)" [color=blue shape=box3d]
+		"act(0,4)" -> "mode(0,4)" [arrowhead=tee color=blue style=dotted]
+	}
+	subgraph "cluster[act(1,0)]" {
+		color=lightgrey style=filled
+		"act(1,0)" [color=red shape=rectangle]
+		"act(1,0)
+ dummy product" [color=yellow shape=oval]
+		"mode(1,0)" [color=blue shape=box3d]
+		"act(1,0)" -> "mode(1,0)" [arrowhead=tee color=blue style=dotted]
+	}
+	subgraph "cluster[act(1,1)]" {
+		color=lightgrey style=filled
+		"act(1,1)" [color=red shape=rectangle]
+		"act(1,1)
+ dummy product" [color=yellow shape=oval]
+		"mode(1,1)" [color=blue shape=box3d]
+		"act(1,1)" -> "mode(1,1)" [arrowhead=tee color=blue style=dotted]
+	}
+	subgraph "cluster[act(1,2)]" {
+		color=lightgrey style=filled
+		"act(1,2)" [color=red shape=rectangle]
+		"act(1,2)
+ dummy product" [color=yellow shape=oval]
+		"mode(1,2)" [color=blue shape=box3d]
+		"act(1,2)" -> "mode(1,2)" [arrowhead=tee color=blue style=dotted]
+	}
+	subgraph "cluster[act(1,3)]" {
+		color=lightgrey style=filled
+		"act(1,3)" [color=red shape=rectangle]
+		"act(1,3)
+ dummy product" [color=yellow shape=oval]
+		"mode(1,3)" [color=blue shape=box3d]
+		"act(1,3)" -> "mode(1,3)" [arrowhead=tee color=blue style=dotted]
+	}
+	subgraph "cluster[act(1,4)]" {
+		color=lightgrey style=filled
+		"act(1,4)" [color=red shape=rectangle]
+		"act(1,4)
+ dummy product" [color=yellow shape=oval]
+		"mode(1,4)" [color=blue shape=box3d]
+		"act(1,4)" -> "mode(1,4)" [arrowhead=tee color=blue style=dotted]
+	}
+}
